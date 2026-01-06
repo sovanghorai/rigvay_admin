@@ -1,0 +1,40 @@
+.admin-root {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  background: #f6f8fb;
+}
+
+.admin-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  background: #1f2937;
+  color: #fff;
+}
+.admin-brand { font-weight: 700 }
+.admin-nav-items { display:flex; gap:8px }
+.nav-item {
+  background: transparent;
+  color: #cbd5e1;
+  border: 1px solid transparent;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+.nav-item.active, .nav-item:hover { color: #fff; background: rgba(255,255,255,0.06) }
+
+.admin-main { padding: 20px }
+.placeholder { background: #fff; padding:20px; border-radius:8px }
+
+.dealer-page h2 { margin-top: 0 }
+.tabs { margin: 12px 0 }
+.tab { padding: 8px 12px; margin-right: 8px; cursor: pointer; border-radius:6px; background:#fff; border:1px solid #e6eef8 }
+.tab.active { background:#1d4ed8; color:#fff }
+
+.dealers-table-wrap { overflow:auto; background:#fff; padding:12px; border-radius:8px }
+.dealers-table { width:100%; border-collapse: collapse }
+.dealers-table th, .dealers-table td { text-align:left; padding:8px; border-bottom:1px solid #eef2f7 }
+.dealers-table thead th { background:#f1f5f9 }
+.btn-approve { background:#10b981; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer }
+.empty { text-align:center; color:#64748b; padding:12px }
