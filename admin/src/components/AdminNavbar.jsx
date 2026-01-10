@@ -1,7 +1,8 @@
 import React from 'react'
 import '../styles/admin.css'
+import '../styles/adminNavbar.css'
 
-export default function AdminNavbar({ current, onNavigate }) {
+export default function AdminNavbar({ current, onNavigate, onLogout }) {
   return (
     <nav className="admin-navbar">
       <div className="admin-brand">Rigvay Admin</div>
@@ -18,6 +19,13 @@ export default function AdminNavbar({ current, onNavigate }) {
         >
           Cars
         </button>
+      </div>
+      <div style={{ marginLeft: 'auto' }}>
+        {onLogout && (
+          <button className="nav-item" onClick={onLogout}>
+            Logout
+          </button>
+        )}
       </div>
     </nav>
   )

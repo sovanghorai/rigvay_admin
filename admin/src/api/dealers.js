@@ -1,44 +1,34 @@
-const STORAGE_KEY = 'mockDealers_v1'
+import { authFetch } from './auth'
 
-const initial = [
-  { _id: '1', rigvay_id: '1000000001', firstName: 'Alice', lastName: 'Khan', phone: '9991112222', email: 'alice@example.com', companyName: 'Alice Autos', state: 'Karnataka', adminApproved: true },
-  { _id: '2', rigvay_id: '1000000002', firstName: 'Bob', lastName: 'Roy', phone: '9993334444', email: 'bob@example.com', companyName: 'Roy Motors', state: 'Maharashtra', adminApproved: false },
-  { _id: '3', rigvay_id: '1000000003', firstName: 'Clara', lastName: 'Das', phone: '9995556666', email: 'clara@example.com', companyName: 'Clara Cars', state: 'Tamil Nadu', adminApproved: false },
-]
+const API_BASE = 'http://localhost:3000/api'
 
-function read() {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (!raw) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(initial))
-      return initial.slice()
-    }
-    return JSON.parse(raw)
-  } catch (e) {
-    console.error(e)
-    return initial.slice()
+async function handleJsonResponse(res) { 
+  const text = await res.text()
+  let data
+  try { data = text ? JSON.parse(text) : {} } catch (e) { data = { message: text } }
+  if (!res.ok) {
+    const err = new Error(data?.message || 'Request failed')
+    err.status = res.status
+    err.payload = data
+    throw err
   }
-}
-
-function write(list) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(list))
+  return data
 }
 
 export async function getAllDealers() {
-  return read()
+  const res = await authFetch(`${API_BASE}/admin/dealers`, { method: 'GET' })
+  const data = await handleJsonResponse(res)
+  return data?.data || []
 }
 
 export async function getUnapprovedDealers() {
-  return read().filter(d => !d.adminApproved)
+  const res = await authFetch(`${API_BASE}/admin/dealers-unapproved`, { method: 'GET' })
+  const data = await handleJsonResponse(res)
+  return data?.data || []
 }
 
-export async function approveDealer(rigvay_id) {
-  const list = read()
-  const idx = list.findIndex(d => d.rigvay_id === rigvay_id)
-  if (idx !== -1) {
-    list[idx].adminApproved = true
-    write(list)
-    return true
-  }
-  return false
+export async function approveDealer(id) {
+  const res = await authFetch(`${API_BASE}/admin/dealer-approve/${id}`, { method: 'POST' })
+  const data = await handleJsonResponse(res)
+  return data?.data || null
 }

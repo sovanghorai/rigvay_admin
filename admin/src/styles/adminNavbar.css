@@ -1,0 +1,56 @@
+/* Navbar specific styles */
+.admin-navbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  background: linear-gradient(90deg, #0b3b5a, #0e5a8a);
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(11,59,90,0.12);
+  border-radius: 6px;
+}
+
+.admin-brand {
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+}
+
+.admin-nav-items {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 1rem;
+}
+
+.nav-item {
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 120ms ease, color 120ms ease, transform 120ms ease;
+}
+
+.nav-item:hover {
+  background: rgba(255,255,255,0.06);
+}
+
+.nav-item.active {
+  background: #ffffff;
+  color: #0b3b5a;
+  box-shadow: 0 1px 0 rgba(11,59,90,0.06) inset;
+}
+
+@media (max-width: 680px) {
+  .admin-navbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .admin-nav-items {
+    width: 100%;
+    justify-content: flex-start;
+    margin-left: 0rem;
+  }
+}

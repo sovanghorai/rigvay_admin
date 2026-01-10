@@ -38,3 +38,54 @@
 .dealers-table thead th { background:#f1f5f9 }
 .btn-approve { background:#10b981; color:#fff; border:none; padding:6px 10px; border-radius:6px; cursor:pointer }
 .empty { text-align:center; color:#64748b; padding:12px }
+
+/* Login page styles */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 64px);
+  padding: 24px;
+}
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(16,24,40,0.06);
+  padding: 28px;
+}
+.login-card h2 { margin: 0 0 8px 0; font-size: 20px }
+.login-card p.hint { margin: 0 0 18px 0; color: #64748b; font-size: 14px }
+.login-field { display:flex; flex-direction:column; gap:6px; margin-bottom:12px }
+.login-field label { font-size: 13px; color: #334155 }
+.login-field input {
+  padding: 10px 12px;
+  border: 1px solid #e6eef8;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+.login-actions { display:flex; gap:8px; align-items:center; margin-top:12px }
+.btn-primary {
+  background: #1d4ed8;
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.btn-secondary {
+  background: transparent;
+  color: #1d4ed8;
+  border: 1px solid #c7d2fe;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.login-foot { margin-top:14px; font-size:13px; color:#64748b }
+
+@media (max-width: 480px) {
+  .login-card { padding: 20px; border-radius:10px }
+  .admin-main { padding: 12px }
+}
