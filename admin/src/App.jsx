@@ -5,6 +5,7 @@ import AdminNavbar from './components/AdminNavbar'
 import DealerPage from './pages/DealerPage'
 import AdminLogin from './pages/AdminLogin'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import CarsPage from "./pages/CarsPage";
 
 function ProtectedRoute({ token, children }) {
   if (!token) return <Navigate to="/login" replace />
@@ -17,11 +18,7 @@ function AdminLayout({ section, setSection, onLogout }) {
       <AdminNavbar current={section} onNavigate={setSection} onLogout={onLogout} />
       <main className="admin-main">
         {section === 'Dealer' && <DealerPage />}
-        {section === 'Cars' && (
-          <div className="placeholder">
-            <h2>Cars Management (Under Development . . . .)</h2>
-          </div>
-        )}
+        {section === "Cars" && <CarsPage />}
       </main>
     </div>
   )
