@@ -1,6 +1,6 @@
 import { authFetch } from "./auth";
 
-const API_BASE = "http://localhost:3000/api";
+const API_BASE = "https://rigvay-server-shared.onrender.com/api";
 
 async function handleJsonResponse(res) {
   const text = await res.text();

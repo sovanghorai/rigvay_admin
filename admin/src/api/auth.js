@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000/api'
+const API_BASE = 'https://rigvay-server-shared.onrender.com/api'
 
 async function postJson(url, body) {
   const res = await fetch(url, {
