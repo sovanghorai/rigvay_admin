@@ -5,7 +5,7 @@ body { background: #f4f7fb; }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem 1rem;
+  padding: 0rem 1rem;
 }
 .login-card {
   width: 420px;
@@ -76,4 +76,9 @@ body { background: #f4f7fb; }
 @media (max-width: 520px) {
   .login-card { padding: 1.2rem }
   .phone-prefix { width:48px; font-size:0.95rem }
+  .login-container {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
 }
