@@ -1,0 +1,119 @@
+/* IMAGE LIST */
+.car-images {
+  display: flex;
+  gap: 10px;
+  max-width: 320px;
+  overflow-x: auto;
+  padding: 6px 0;
+}
+
+/* BIGGER IMAGE THUMBNAIL */
+.car-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.car-thumb:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+/* NO IMAGE */
+.no-images {
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* YEAR */
+.car-year {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* MODAL BACKDROP */
+.image-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+/* MODAL IMAGE */
+.image-modal img {
+  width: 500px;
+  height: 350px;
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+
+
+
+.car-info-cell {
+  min-width: 180px;
+}
+
+/* Car title */
+.car-title {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* NEW badge */
+.new-badge {
+  margin-left: 6px;
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #ff3b3b;
+  color: #fff;
+  border-radius: 10px;
+  animation: blink 1.2s infinite;
+}
+
+/* Days ago styles */
+.days-ago {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.days-ago.today {
+  color: #1b8f3c;
+  background: #e6f7ee;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.days-ago.yesterday {
+  color: #b35c00;
+  background: #fff4e5;
+  padding: 3px 8px;
+  border-radius: 12px;
+}
+
+.days-ago.old {
+  color: #b20202;
+}
+
+/* Created date */
+.create-date {
+  font-size: 11px;
+  color: #760808;
+  margin-top: 3px;
+}
+
+/* Blink animation */
+@keyframes blink {
+  0% { opacity: 1; }
+  50% { opacity: 0.4; }
+  100% { opacity: 1; }
+}

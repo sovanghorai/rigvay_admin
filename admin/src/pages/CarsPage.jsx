@@ -23,7 +23,8 @@ export default function CarsPage() {
     await approveCar(id);
     load();
   };
-
+  
+  
   return (
     <div className="dealer-page">
       <h2>Cars</h2>
