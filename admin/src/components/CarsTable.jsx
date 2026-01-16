@@ -1,5 +1,6 @@
 import { useState } from "react";
-import "../styles/CarsTable.css";
+import "../styles/carsTable.css";
+
 
 export default function CarsTable({ cars, onApprove }) {
   const [previewImg, setPreviewImg] = useState(null);
