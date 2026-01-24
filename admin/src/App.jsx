@@ -6,6 +6,7 @@ import DealerPage from './pages/DealerPage'
 import AdminLogin from './pages/AdminLogin'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import CarsPage from "./pages/CarsPage";
+import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
 
 function ProtectedRoute({ token, children }) {
   if (!token) return <Navigate to="/login" replace />
@@ -19,10 +20,12 @@ function AdminLayout({ section, setSection, onLogout }) {
       <main className="admin-main">
         {section === 'Dealer' && <DealerPage />}
         {section === "Cars" && <CarsPage />}
+        {section === "DealerSubscriptions" && <AdminDealerSubscription />}
       </main>
     </div>
   )
 }
+
 
 function App() {
   const [section, setSection] = useState('Dealer')

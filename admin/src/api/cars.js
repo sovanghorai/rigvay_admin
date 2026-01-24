@@ -1,6 +1,6 @@
 import { authFetch } from "./auth";
 
-const API_BASE = "https://rigvay-server-shared.onrender.com/api";
+const API_BASE = import.meta.env.VITE_API_BASE_URL;
 
 async function handleJsonResponse(res) {
   const text = await res.text();
