@@ -1,34 +1,27 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import '../styles/admin.css'
 import '../styles/adminNavbar.css'
 
-export default function AdminNavbar({ current, onNavigate, onLogout }) {
+export default function AdminNavbar({ onLogout }) {
+  const linkClass = ({ isActive }) => 'nav-item' + (isActive ? ' active' : '')
+
   return (
     <nav className="admin-navbar">
       <div className="admin-brand">Rigvay Admin</div>
 
       <div className="admin-nav-items">
-        <button
-          className={"nav-item " + (current === 'Dealer' ? 'active' : '')}
-          onClick={() => onNavigate('Dealer')}
-        >
+        <NavLink to="/" className={linkClass} end>
           Dealer
-        </button>
+        </NavLink>
 
-        <button
-          className={"nav-item " + (current === 'Cars' ? 'active' : '')}
-          onClick={() => onNavigate('Cars')}
-        >
+        <NavLink to="/cars" className={linkClass}>
           Cars
-        </button>
+        </NavLink>
 
-        {/* New Subscriptions Button */}
-        <button
-          className={"nav-item " + (current === 'DealerSubscriptions' ? 'active' : '')}
-          onClick={() => onNavigate('DealerSubscriptions')}
-        >
+        <NavLink to="/subscriptions" className={linkClass}>
           Subscriptions
-        </button>
+        </NavLink>
       </div>
 
       <div style={{ marginLeft: 'auto' }}>
