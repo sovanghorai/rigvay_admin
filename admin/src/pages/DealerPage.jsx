@@ -4,7 +4,8 @@ import {
   getAllDealers,
   getUnapprovedDealers,
   approveDealer,
-  searchDealers
+  searchDealers,
+  rejectDealer,
 } from "../api/dealers";
 import "../styles/dealerPage.css";
 
@@ -86,6 +87,10 @@ export default function DealerPage() {
     loadDealers();
   };
 
+  const handleReject = async (id) => {
+    await rejectDealer(id);
+    loadDealers();
+  };
   const handleSearch = () => {
     setPage(1);
     setSearch(searchInput.trim());
@@ -187,7 +192,7 @@ export default function DealerPage() {
         Total Dealers : {totalCount}
       </div>
 
-      <DealersTable dealers={dealers} onApprove={handleApprove} />
+      <DealersTable dealers={dealers} onApprove={handleApprove}  onReject={handleReject} />
 
       {tab === "all" && !search && (
         <div className="pagination">

@@ -2,7 +2,7 @@ import React from 'react'
 import '../styles/admin.css'
 import '../styles/dealersTable.css'
 
-export default function DealersTable({ dealers, onApprove }) {
+export default function DealersTable({ dealers, onApprove, onReject }) {
   return (
     <div className="dealers-table-wrap">
       <table className="dealers-table">
@@ -54,8 +54,20 @@ export default function DealersTable({ dealers, onApprove }) {
                 )}
               </td>
               <td>
-                {!d.adminApproved && (
-                  <button className="btn-approve" onClick={() => onApprove(d._id)}>Approve</button>
+                {!d.adminApproved ? (
+                  <button
+                    className="btn-approve"
+                    onClick={() => onApprove(d._id)}
+                  >
+                    Approve
+                  </button>
+                ) : (
+                  <button
+                    className="btn-reject"
+                    onClick={() => onReject(d._id)}
+                  >
+                    Reject
+                  </button>
                 )}
               </td>
             </tr>
