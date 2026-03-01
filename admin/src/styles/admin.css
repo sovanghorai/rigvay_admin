@@ -24,7 +24,7 @@
 }
 .nav-item.active, .nav-item:hover { color: #fff; background: rgba(255,255,255,0.06) }
 
-.admin-main { padding: 20px }
+.admin-main { padding: 5px }
 .placeholder { background: #fff; padding:20px; border-radius:8px }
 
 .dealer-page h2 { margin-top: 0 }
@@ -87,5 +87,5 @@
 
 @media (max-width: 480px) {
   .login-card { padding: 20px; border-radius:10px }
-  .admin-main { padding: 12px }
+  .admin-main { padding: 5px }
 }
