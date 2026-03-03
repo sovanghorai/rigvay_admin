@@ -1,21 +1,36 @@
 import { useState } from "react";
 import "../styles/carsTable.css";
+import { getDealerProfile } from "../api/cars";
 
-
-export default function CarsTable({ cars, onApprove }) {
+export default function CarsTable({
+  cars = [],
+  onApprove,
+  onReject,
+  onSold,
+  onDelete
+}) {
   const [previewImg, setPreviewImg] = useState(null);
+  const [profileData, setProfileData] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
+
   const getDaysAgo = (date) => {
-    if (!date) return { text: "", className: "" };
+    if (!date) return "";
     const days = Math.floor(
-      (new Date() - new Date(date)) / (1000 * 60 * 60 * 24),
+      (new Date() - new Date(date)) / (1000 * 60 * 60 * 24)
     );
-    if (days === 0) {
-      return { text: "Added today", className: "today" };
+    if (days === 0) return "Added today";
+    if (days === 1) return "Added yesterday";
+    return `Added ${days} days ago`;
+  };
+
+  const handleProfileClick = async (dealerId) => {
+    try {
+      const res = await getDealerProfile(dealerId);
+      setProfileData(res?.data?.profile || null);
+      setShowProfile(true);
+    } catch (err) {
+      console.error("Profile fetch error:", err);
     }
-    if (days === 1) {
-      return { text: "Added yesterday", className: "yesterday" };
-    }
-    return { text: `Added ${days} days ago`, className: "old" };
   };
 
   return (
@@ -34,95 +49,135 @@ export default function CarsTable({ cars, onApprove }) {
               <th>Distance (km)</th>
               <th>Reg. Year</th>
               <th>Status</th>
-              <th></th>
+              <th>Actions</th>
             </tr>
           </thead>
 
           <tbody>
-            {cars && cars.length ? (
+            {cars.length > 0 ? (
               cars.map((car) => {
-                const daysInfo = getDaysAgo(car.createdAt);
-                const images = car.images?.slice(0, 10) || [];
-                const distanceInKm = car.distance
-                  ? (car.distance).toLocaleString("en-IN")
-                  : "-";
+                const images = car.images?.slice(0, 4) || [];
 
                 return (
-                  <tr key={car._id}>
-                    {/* CAR INFO */}
+                  <tr key={car._id} className={car.status === "sold" ? "sold-row" : ""}>
+                    
+                    {/* Car */}
                     <td>
-                      <strong>
-                        {car.brand} {car.model}
-                      </strong>
-                      <div className="car-year">{car.year}</div>
-                      <div className={`days-ago ${daysInfo.className}`}>
-                        {daysInfo.text}
+                      <strong>{car.brand} {car.model}</strong>
+                      <div style={{ fontSize: "12px", color: "#666" }}>
+                        {getDaysAgo(car.createdAt)}
                       </div>
                     </td>
 
-                    {/* IMAGES */}
+                    {/* Images */}
                     <td>
                       <div className="car-images">
-                        {images.length ? (
-                          images.map((url, idx) => (
+                        {images.length > 0 ? (
+                          images.map((img, i) => (
                             <img
-                              key={idx}
-                              src={url}
+                              key={i}
+                              src={img}
                               alt="car"
                               className="car-thumb"
-                              onClick={() => setPreviewImg(url)}
+                              onClick={() => setPreviewImg(img)}
                             />
                           ))
                         ) : (
-                          <span className="no-images">No images</span>
+                          <span>No images</span>
                         )}
                       </div>
                     </td>
 
-                    <td>{car.type}</td>
-                    <td>₹ {car.price?.toLocaleString("en-IN")}</td>
-                    <td>{car.fuelType}</td>
-                    <td>{car.transmission}</td>
+                    {/* Type */}
+                    <td>{car.type || "-"}</td>
 
-                    {/* NEW FIELDS */}
-                    <td>
-                      {car.location?.state && car.location?.city
-                        ? `${car.location.state}, ${car.location.city}`
-                        : car.location?.state
-                          ? car.location.state
-                          : car.location?.city
-                            ? car.location.city
-                            : "-"}
-                    </td>
-                    <td>{distanceInKm}</td>
+                    {/* Price */}
+                    <td>₹ {car.price?.toLocaleString("en-IN") || "-"}</td>
+
+                    {/* Fuel */}
+                    <td>{car.fuelType || "-"}</td>
+
+                    {/* Transmission */}
+                    <td>{car.transmission || "-"}</td>
+
+                    {/* Location */}
+                    <td>{car.location || "-"}</td>
+
+                    {/* Distance */}
+                    <td>{car.distance || "-"}</td>
+
+                    {/* Registration Year */}
                     <td>{car.registrationYear || "-"}</td>
 
-                    {/* STATUS */}
+                    {/* Status */}
                     <td>
-                      {car.status === "live" ? (
+                      {car.status === "live" && (
                         <span className="badge approved">Live</span>
-                      ) : (
-                        <span className="badge unapproved">{car.status}</span>
+                      )}
+                      {car.status === "review" && (
+                        <span className="badge unapproved">Review</span>
+                      )}
+                      {car.status === "sold" && (
+                        <span className="badge sold">Sold</span>
                       )}
                     </td>
 
-                    {/* APPROVE BUTTON */}
-                    <td>
+                    {/* Actions */}
+                    <td className="action-buttons">
+
+                      {/* Approve (only if not live) */}
                       {car.status !== "live" && (
                         <button
-                          className="btn-approve"
+                          className="btn btn-approve"
                           onClick={() => onApprove(car._id)}
                         >
                           Approve
                         </button>
                       )}
+
+                      {/* Reject (only if live) */}
+                      {car.status === "live" && (
+                        <button
+                          className="btn btn-reject"
+                          onClick={() => onReject(car._id)}
+                        >
+                          Reject
+                        </button>
+                      )}
+
+                      {/* Sold */}
+                      {car.status !== "sold" && (
+                        <button
+                          className="btn btn-sold"
+                          onClick={() => onSold(car._id)}
+                        >
+                          Sold
+                        </button>
+                      )}
+
+                      {/* Delete (Always visible) */}
+                      <button
+                        className="btn btn-delete"
+                        onClick={() => onDelete(car._id)}
+                      >
+                        Delete
+                      </button>
+
+                      {/* Profile */}
+                      <button
+                        className="btn btn-profile"
+                        onClick={() => handleProfileClick(car.dealer?._id)}
+                      >
+                        Profile
+                      </button>
+
                     </td>
                   </tr>
                 );
               })
             ) : (
               <tr>
-                <td colSpan={11} className="empty">
+                <td colSpan="11" style={{ textAlign: "center" }}>
                   No cars found
                 </td>
               </tr>
@@ -133,9 +188,42 @@ export default function CarsTable({ cars, onApprove }) {
 
       {/* IMAGE PREVIEW MODAL */}
       {previewImg && (
-        <div className="image-modal" onClick={() => setPreviewImg(null)}>
-          <div className="image-box">
-            <img src={previewImg} alt="preview" />
+        <div className="modal" onClick={() => setPreviewImg(null)}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <img src={previewImg} alt="preview" style={{ width: "100%" }} />
+          </div>
+        </div>
+      )}
+
+      {/* PROFILE MODAL */}
+      {showProfile && (
+        <div className="modal" onClick={() => setShowProfile(false)}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <h3>Dealer Profile</h3>
+
+            {profileData ? (
+              <>
+                <img
+                  src={profileData.profileImageUrl}
+                  alt="profile"
+                  className="profile-img"
+                />
+                <p><strong>Name:</strong> {profileData.firstName} {profileData.lastName}</p>
+                <p><strong>Email:</strong> {profileData.email}</p>
+                <p><strong>Phone:</strong> {profileData.phone}</p>
+                <p><strong>Company:</strong> {profileData.companyName}</p>
+                <p><strong>State:</strong> {profileData.state}</p>
+              </>
+            ) : (
+              <p>Loading...</p>
+            )}
+
+            <button
+              className="btn btn-close"
+              onClick={() => setShowProfile(false)}
+            >
+              Close
+            </button>
           </div>
         </div>
       )}
