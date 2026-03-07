@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as api from '../api/producers';
-import '../styles/producers.css'; // Add exact CSS imports
+import '../styles/producers.css';
 
 const ProducersPage = () => {
   const [producers, setProducers] = useState([]);
@@ -11,6 +11,10 @@ const ProducersPage = () => {
   
   // For adding models within an expanded brand
   const [newModelName, setNewModelName] = useState('');
+
+  // For inline brand rename
+  const [editingBrandId, setEditingBrandId] = useState(null);
+  const [editingBrandName, setEditingBrandName] = useState('');
 
   useEffect(() => {
     loadProducers();
@@ -50,10 +54,33 @@ const ProducersPage = () => {
     }
   };
 
+  const startEditing = (producer, e) => {
+    e.stopPropagation();
+    setEditingBrandId(producer._id);
+    setEditingBrandName(producer.name);
+  };
+
+  const handleRenameBrand = async (id) => {
+    if (!editingBrandName.trim()) return;
+    try {
+      await api.renameProducer(id, editingBrandName.trim());
+      setEditingBrandId(null);
+      setEditingBrandName('');
+      loadProducers();
+    } catch (error) {
+      alert('Failed to rename brand');
+    }
+  };
+
+  const cancelEditing = (e) => {
+    e.stopPropagation();
+    setEditingBrandId(null);
+    setEditingBrandName('');
+  };
+
   const handleAddModel = async (producer) => {
     if (!newModelName.trim()) return;
     
-    // Check if model already exists
     if (producer.models.some(m => m.toLowerCase() === newModelName.trim().toLowerCase())) {
       alert('Model already exists');
       return;
@@ -84,7 +111,7 @@ const ProducersPage = () => {
   };
 
   if (loading) {
-    return <div className="p-8 text-center text-gray-500">Loading Producers...</div>;
+    return <div style={{ padding: 32, textAlign: 'center', color: '#6b7280' }}>Loading Producers...</div>;
   }
 
   return (
@@ -119,15 +146,42 @@ const ProducersPage = () => {
             <div 
               className="brand-header"
               onClick={() => {
+                if (editingBrandId === producer._id) return; // Don't toggle while editing
                 setExpandedBrandId(expandedBrandId === producer._id ? null : producer._id);
-                setNewModelName(''); // Reset model input on toggle
+                setNewModelName('');
               }}
             >
               <div className="brand-info">
-                <span className="brand-name">{producer.name}</span>
-                <span className="brand-count">
-                  {producer.models.length} Models
-                </span>
+                {editingBrandId === producer._id ? (
+                  <div className="brand-edit-row" onClick={(e) => e.stopPropagation()}>
+                    <input
+                      type="text"
+                      value={editingBrandName}
+                      onChange={(e) => setEditingBrandName(e.target.value)}
+                      className="input-field brand-edit-input"
+                      autoFocus
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') handleRenameBrand(producer._id);
+                        if (e.key === 'Escape') cancelEditing(e);
+                      }}
+                    />
+                    <button className="btn-save" onClick={() => handleRenameBrand(producer._id)}>Save</button>
+                    <button className="btn-cancel" onClick={cancelEditing}>Cancel</button>
+                  </div>
+                ) : (
+                  <>
+                    <span className="brand-name">{producer.name}</span>
+                    <button
+                      className="btn-edit-text"
+                      onClick={(e) => startEditing(producer, e)}
+                    >
+                      ✏️ Edit
+                    </button>
+                    <span className="brand-count">
+                      {producer.models.length} Models
+                    </span>
+                  </>
+                )}
               </div>
               
               <div className="brand-actions">
@@ -198,3 +252,4 @@ const ProducersPage = () => {
 };
 
 export default ProducersPage;
+

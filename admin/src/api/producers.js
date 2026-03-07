@@ -35,3 +35,13 @@ export async function updateProducerModels(id, models) {
   if (!res.ok) throw new Error('Update models failed');
   return res.json();
 }
+
+export async function renameProducer(id, name) {
+  const res = await authFetch(`${API_BASE}/admin/producers/${id}/rename`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name })
+  });
+  if (!res.ok) throw new Error('Rename failed');
+  return res.json();
+}

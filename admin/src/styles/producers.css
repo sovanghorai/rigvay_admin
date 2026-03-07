@@ -230,3 +230,61 @@
   font-size: 14px;
   font-style: italic;
 }
+
+/* Brand inline edit */
+.brand-edit-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-edit-input {
+  width: 220px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.btn-edit-text {
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #6b7280;
+}
+
+.btn-edit-text:hover {
+  background-color: #f3f4f6;
+  color: #1f2937;
+}
+
+.btn-save {
+  background-color: #10b981;
+  color: white;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.btn-save:hover {
+  background-color: #059669;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #6b7280;
+  border: 1px solid #d1d5db;
+  padding: 6px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.btn-cancel:hover {
+  background-color: #f3f4f6;
+}
+
