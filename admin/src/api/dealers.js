@@ -24,10 +24,13 @@ async function handleJsonResponse(res) {
 
 /* ================= DEALERS ================= */
 
-export async function getAllDealers() {
-  const res = await authFetch(`${API_BASE}/admin/dealers`, { method: "GET" });
-  const data = await handleJsonResponse(res);
-  return data?.data || [];
+export async function getAllDealers(page = 1, limit = 20, search = "") {
+  const res = await authFetch(
+    `${API_BASE}/admin/dealers?page=${page}&limit=${limit}&search=${encodeURIComponent(search)}`,
+    { method: "GET" }
+  );
+
+  return handleJsonResponse(res);
 }
 
 export async function getUnapprovedDealers() {
@@ -47,6 +50,15 @@ export async function approveDealer(dealerProfileId) {
   return data?.data || null;
 }
 
+export async function rejectDealer(dealerProfileId) {
+  const res = await authFetch(
+    `${API_BASE}/admin/dealer-reject/${dealerProfileId}`,
+    { method: "POST" }
+  );
+
+  const data = await handleJsonResponse(res);
+  return data?.data || null;
+}
 export async function searchDealers(query) {
   const res = await authFetch(
     `${API_BASE}/admin/dealers/search?q=${encodeURIComponent(query)}`,

@@ -1,0 +1,153 @@
+.dealer-page {
+  padding: 5px;
+}
+
+/* SEARCH SECTION */
+.search-wrapper {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-box {
+  position: relative;
+  width: 320px;
+}
+
+.search-input {
+  padding: 8px 4px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+  font-size: 14px;
+}
+
+.search-input:focus {
+  border-color: #2c5cc5;
+  box-shadow: 0 0 0 2px rgba(44, 92, 197, 0.1);
+}
+
+.search-btn {
+  padding: 8px 14px;
+  background-color: #2c5cc5;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #1e4bb8;
+}
+
+.clear-btn {
+  padding: 8px 14px;
+  background-color: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.clear-btn:hover {
+  background-color: #c0392b;
+}
+
+/* SUGGESTIONS DROPDOWN */
+.suggestions-box {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  z-index: 1000;
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid #eaeaea;
+  animation: fadeIn 0.15s ease-in-out;
+}
+
+.suggestion-item {
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:hover {
+  background: #f0f4ff;
+}
+
+.suggestion-name {
+  font-weight: 600;
+  color: #222;
+}
+
+.suggestion-sub {
+  font-size: 0.8rem;
+  color: #777;
+  margin-top: 2px;
+}
+
+/* TABS */
+.tabs {
+  margin-bottom: 15px;
+  display: flex;
+  gap: 10px;
+}
+
+.tab {
+  padding: 8px 14px;
+  border: 1px solid #ccc;
+  background: #f4f4f4;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.tab.active {
+  background: #2c5cc5;
+  color: white;
+  border-color: #2c5cc5;
+}
+
+/* COUNT */
+.dealer-count {
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.pagination button {
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

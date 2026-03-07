@@ -13,14 +13,15 @@ function ProtectedRoute({ token, children }) {
   return children
 }
 
-function AdminLayout({ section, setSection, onLogout }) {
+import { Outlet } from 'react-router-dom'
+
+function AdminLayout({ onLogout }) {
   return (
     <div className="admin-root">
-      <AdminNavbar current={section} onNavigate={setSection} onLogout={onLogout} />
+      <AdminNavbar onLogout={onLogout} />
       <main className="admin-main">
-        {section === 'Dealer' && <DealerPage />}
-        {section === "Cars" && <CarsPage />}
-        {section === "DealerSubscriptions" && <AdminDealerSubscription />}
+        {/* nested routes will render here */}
+        <Outlet />
       </main>
     </div>
   )
@@ -28,14 +29,12 @@ function AdminLayout({ section, setSection, onLogout }) {
 
 
 function App() {
-  const [section, setSection] = useState('Dealer')
   const [token, setToken] = useState(localStorage.getItem('admin_access_token') || null)
 
   const handleLogin = (t) => setToken(t)
   const handleLogout = () => {
     localStorage.removeItem('admin_access_token')
     setToken(null)
-    setSection('Dealer')
   }
 
   return (
@@ -46,10 +45,15 @@ function App() {
           path="/"
           element={
             <ProtectedRoute token={token}>
-              <AdminLayout section={section} setSection={setSection} onLogout={handleLogout} />
+              <AdminLayout onLogout={handleLogout} />
             </ProtectedRoute>
           }
-        />
+        >
+          <Route index element={<DealerPage />} />
+          <Route path="cars" element={<CarsPage />} />
+          <Route path="subscriptions" element={<AdminDealerSubscription />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
         <Route path="*" element={<Navigate to={token ? '/' : '/login'} replace />} />
       </Routes>
     </div>

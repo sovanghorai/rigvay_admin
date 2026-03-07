@@ -1,13 +1,15 @@
 /* Navbar specific styles */
 .admin-navbar {
+  position: sticky;      /* ✅ important */
+  top: 0;  
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.6rem 1rem;
-  background: linear-gradient(90deg, #0b3b5a, #0e5a8a);
+  background: linear-gradient(90deg, #f97316, #c2410c);
   color: #ffffff;
   box-shadow: 0 2px 6px rgba(11,59,90,0.12);
-  border-radius: 6px;
+  z-index: 1000;
 }
 
 .admin-brand {

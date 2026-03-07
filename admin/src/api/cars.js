@@ -14,23 +14,53 @@ async function handleJsonResponse(res) {
   return data;
 }
 
-export async function getAllCars() {
-  const res = await authFetch(`${API_BASE}/admin/cars`);
-  const data = await handleJsonResponse(res);
-  return data?.data || [];
+export async function getAllCars(page = 1) {
+  const res = await authFetch(`${API_BASE}/admin/cars?page=${page}`);
+  return handleJsonResponse(res);
 }
 
-export async function getUnapprovedCars() {
-  const res = await authFetch(`${API_BASE}/admin/cars-unapproved`);
-  const data = await handleJsonResponse(res);
-  return data?.data || [];
+export async function getUnapprovedCars(page = 1) {
+  const res = await authFetch(
+    `${API_BASE}/admin/cars-unapproved?page=${page}`
+  );
+  return handleJsonResponse(res);
 }
-
 export async function approveCar(id) {
   const res = await authFetch(
     `${API_BASE}/admin/car-approve/${id}`,
     { method: "POST" }
   );
-  const data = await handleJsonResponse(res);
-  return data?.data;
+  return handleJsonResponse(res);
+}
+
+export async function rejectCar(id) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-reject/${id}`,
+    { method: "POST" }
+  );
+  return handleJsonResponse(res);
+}
+
+export async function markSold(id) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-sold/${id}`,
+    { method: "POST" }
+  );
+  return handleJsonResponse(res);
+}
+export async function deleteCar(id) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-deleted/${id}`,
+    {
+      method: "POST",   // ✅ Important
+    }
+  );
+
+  return handleJsonResponse(res);
+}
+export async function getDealerProfile(dealerId) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-dealer/${dealerId}`
+  );
+  return handleJsonResponse(res);
 }
