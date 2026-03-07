@@ -22,6 +22,10 @@ export default function AdminNavbar({ onLogout }) {
         <NavLink to="/subscriptions" className={linkClass}>
           Subscriptions
         </NavLink>
+
+        <NavLink to="/producers" className={linkClass}>
+          Producers
+        </NavLink>
       </div>
 
       <div style={{ marginLeft: 'auto' }}>

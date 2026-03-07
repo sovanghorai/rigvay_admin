@@ -7,6 +7,7 @@ import AdminLogin from './pages/AdminLogin'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import CarsPage from "./pages/CarsPage";
 import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
+import ProducersPage from "./pages/ProducersPage";
 
 function ProtectedRoute({ token, children }) {
   if (!token) return <Navigate to="/login" replace />
@@ -52,6 +53,8 @@ function App() {
           <Route index element={<DealerPage />} />
           <Route path="cars" element={<CarsPage />} />
           <Route path="subscriptions" element={<AdminDealerSubscription />} />
+          <Route path ="producers" element={<ProducersPage />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
         <Route path="*" element={<Navigate to={token ? '/' : '/login'} replace />} />
