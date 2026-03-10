@@ -13,7 +13,7 @@
   color: #fff;
 }
 .admin-brand { font-weight: 700 }
-.admin-nav-items { display:flex; gap:8px }
+.admin-nav-items { display:flex; }
 .nav-item {
   background: transparent;
   color: #cbd5e1;

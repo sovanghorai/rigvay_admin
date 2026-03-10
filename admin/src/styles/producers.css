@@ -287,4 +287,130 @@
 .btn-cancel:hover {
   background-color: #f3f4f6;
 }
+/* ================= MOBILE RESPONSIVE ================= */
 
+@media (max-width: 768px) {
+
+  .producers-container {
+    padding: 16px;
+  }
+
+  .producers-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .producers-title {
+    font-size: 20px;
+  }
+
+  .producers-tip {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .producers-card {
+    padding: 16px;
+  }
+
+  .add-brand-form {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .btn-primary-orange {
+    width: 100%;
+  }
+
+  .brand-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 14px;
+  }
+
+  .brand-info {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .brand-name {
+    font-size: 16px;
+  }
+
+  .brand-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .btn-delete-text {
+    font-size: 13px;
+    padding: 4px 6px;
+  }
+
+  .brand-models-panel {
+    padding: 14px;
+  }
+
+  .add-model-section {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .btn-dark {
+    width: 100%;
+  }
+
+  .models-grid {
+    gap: 8px;
+  }
+
+  .model-tag {
+    font-size: 13px;
+    padding: 5px 10px;
+  }
+
+  .brand-edit-row {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .brand-edit-input {
+    width: 100%;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    flex: 1;
+  }
+}
+
+
+
+@media (max-width: 480px) {
+
+  .producers-title {
+    font-size: 18px;
+  }
+
+  .brand-name {
+    font-size: 15px;
+  }
+
+  .brand-count {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+
+  .model-name {
+    font-size: 12px;
+  }
+
+  .btn-primary-orange,
+  .btn-dark {
+    padding: 8px 14px;
+    font-size: 14px;
+  }
+
+}
