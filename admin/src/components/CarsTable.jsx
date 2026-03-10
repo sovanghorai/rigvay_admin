@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../styles/carsTable.css";
 import { getDealerProfile } from "../api/cars";
-
+import { useNavigate } from "react-router-dom";
 export default function CarsTable({
   cars = [],
   onApprove,
@@ -12,6 +12,7 @@ export default function CarsTable({
   const [previewImg, setPreviewImg] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
+  const navigate = useNavigate();
 
   const getDaysAgo = (date) => {
     if (!date) return "";
@@ -169,6 +170,12 @@ export default function CarsTable({
                         onClick={() => handleProfileClick(car.dealer?._id)}
                       >
                         Profile
+                      </button>
+                      <button
+                        className="btn btn-edit"
+                        onClick={() => navigate(`/car-edit/${car._id}`)}
+                      >
+                        Edit
                       </button>
 
                     </td>

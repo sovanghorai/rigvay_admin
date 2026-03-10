@@ -94,7 +94,7 @@
 .btn-delete { background: #444; }
 .btn-profile { background: #007bff; }
 .btn-close { background: #555; margin-top: 12px; }
-
+.btn-edit { background: #3b3a3a; }
 /* MODAL */
 .modal {
   position: fixed;

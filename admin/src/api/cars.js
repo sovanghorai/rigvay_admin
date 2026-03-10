@@ -64,3 +64,21 @@ export async function getDealerProfile(dealerId) {
   );
   return handleJsonResponse(res);
 }
+
+export async function getAdminCarById(id) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-get/${id}`
+  );
+  return handleJsonResponse(res);
+}
+
+export async function editAdminCar(id, formData) {
+  const res = await authFetch(
+    `${API_BASE}/admin/car-edit/${id}`,
+    {
+      method: "PUT",
+      body: formData
+    }
+  );
+  return handleJsonResponse(res);
+}

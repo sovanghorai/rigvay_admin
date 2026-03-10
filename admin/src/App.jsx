@@ -6,6 +6,7 @@ import DealerPage from './pages/DealerPage'
 import AdminLogin from './pages/AdminLogin'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import CarsPage from "./pages/CarsPage";
+import EditCarPage from "./pages/EditCarPage";
 import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
 import ProducersPage from "./pages/ProducersPage";
 
@@ -54,7 +55,7 @@ function App() {
           <Route path="cars" element={<CarsPage />} />
           <Route path="subscriptions" element={<AdminDealerSubscription />} />
           <Route path ="producers" element={<ProducersPage />} />
-
+          <Route path="/car-edit/:carId" element={<EditCarPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
         <Route path="*" element={<Navigate to={token ? '/' : '/login'} replace />} />
