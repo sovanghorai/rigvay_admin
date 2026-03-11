@@ -113,7 +113,22 @@
   max-width: 400px;
   width: 100%;
 }
+/* Serial Number Column */
 
+.serial-col{
+  width:60px;
+  text-align:center;
+  font-weight:600;
+  color:#444;
+}
+
+.dealers-table th.serial-col{
+  background:#f4f6f9;
+}
+
+.dealers-table td.serial-col{
+  background:#fafafa;
+}
 .profile-img {
   width: 90px;
   height: 90px;

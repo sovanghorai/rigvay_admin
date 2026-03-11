@@ -40,6 +40,7 @@ export default function CarsTable({
         <table className="dealers-table">
           <thead>
             <tr>
+              <th className="serial-col">S.No</th>
               <th>Car</th>
               <th>Images</th>
               <th>Type</th>
@@ -56,12 +57,15 @@ export default function CarsTable({
 
           <tbody>
             {cars.length > 0 ? (
-              cars.map((car) => {
+              cars.map((car, index) => {
                 const images = car.images?.slice(0, 4) || [];
 
                 return (
                   <tr key={car._id} className={car.status === "sold" ? "sold-row" : ""}>
-                    
+
+                    {/* Serial Number */}
+                    <td className="serial-col">{index + 1}</td>
+
                     {/* Car */}
                     <td>
                       <strong>{car.brand} {car.model}</strong>
@@ -184,7 +188,7 @@ export default function CarsTable({
               })
             ) : (
               <tr>
-                <td colSpan="11" style={{ textAlign: "center" }}>
+                <td colSpan="12" style={{ textAlign: "center" }}>
                   No cars found
                 </td>
               </tr>

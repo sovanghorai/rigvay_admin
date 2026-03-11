@@ -8,6 +8,7 @@ export default function DealersTable({ dealers, onApprove, onReject }) {
       <table className="dealers-table">
         <thead>
           <tr>
+            <th className="serial-col">S.No</th>
             <th>Dealer</th>
             <th>Contact</th>
             <th>Company</th>
@@ -17,8 +18,11 @@ export default function DealersTable({ dealers, onApprove, onReject }) {
           </tr>
         </thead>
         <tbody>
-          {dealers && dealers.length ? dealers.map(d => (
+          {dealers && dealers.length ? dealers.map((d, index) => (
             <tr key={d._id || d.rigvay_id} className="dealers-row">
+
+              <td className="serial-col">{index + 1}</td>
+
               <td>
                 <div className="dealer-info">
                   {d.profileImageUrl ? (
@@ -72,7 +76,7 @@ export default function DealersTable({ dealers, onApprove, onReject }) {
               </td>
             </tr>
           )) : (
-            <tr><td colSpan={6} className="empty">No dealers found</td></tr>
+            <tr><td colSpan={7} className="empty">No dealers found</td></tr>
           )}
         </tbody>
       </table>
