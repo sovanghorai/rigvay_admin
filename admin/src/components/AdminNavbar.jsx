@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import '../styles/admin.css'
 import '../styles/adminNavbar.css'
-import Logo from "../assets/logo.png";
+// import Logo from "../assets/logo.png";
 
 export default function AdminNavbar({ onLogout }) {
   const [menuOpen, setMenuOpen] = useState(false)
