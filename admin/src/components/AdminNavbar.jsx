@@ -36,9 +36,9 @@ export default function AdminNavbar({ onLogout }) {
           Producers
         </NavLink>
 
-        <NavLink to="/analytics" className={linkClass} onClick={() => setMenuOpen(false)}>
+        {/* <NavLink to="/analytics" className={linkClass} onClick={() => setMenuOpen(false)}>
           Analytics
-        </NavLink>
+        </NavLink> */}
 
         {onLogout && (
           <button className="nav-item logout-btn" onClick={onLogout}>

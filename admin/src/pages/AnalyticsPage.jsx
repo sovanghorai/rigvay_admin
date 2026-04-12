@@ -5,13 +5,13 @@ import UnderMaintenance from "../components/UnderMaintenance";
 const AnalyticsPage = () => {
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    // Replace with your API
-    fetch("http://localhost:8000/api/car-analytics")
-      .then((res) => res.json())
-      .then((res) => setData(res))
-      .catch((err) => console.error(err));
-  }, []);
+  // useEffect(() => {
+  //   // Replace with your API
+  //   fetch("http://localhost:8000/api/car-analytics")
+  //     .then((res) => res.json())
+  //     .then((res) => setData(res))
+  //     .catch((err) => console.error(err));
+  // }, []);
 
   return (
     <UnderMaintenance title="Analytics Coming Soon!"/>

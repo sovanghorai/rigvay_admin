@@ -9,7 +9,7 @@ import CarsPage from "./pages/CarsPage";
 import EditCarPage from "./pages/EditCarPage";
 import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
 import ProducersPage from "./pages/ProducersPage";
-import AnalyticsPage from "./pages/AnalyticsPage";
+// import AnalyticsPage from "./pages/AnalyticsPage";
 
 function ProtectedRoute({ token, children }) {
   if (!token) return <Navigate to="/login" replace />
