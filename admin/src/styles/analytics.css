@@ -1,0 +1,49 @@
+.analytics-container {
+  padding: 20px;
+}
+
+.analytics-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.analytics-table {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.table-header,
+.table-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  padding: 14px 20px;
+  align-items: center;
+}
+
+.table-header {
+  background: #f5f7fb;
+  font-weight: 600;
+  color: #333;
+}
+
+.table-row {
+  border-top: 1px solid #eee;
+  transition: background 0.2s;
+}
+
+.table-row:hover {
+  background: #f9fafc;
+}
+
+.table-row a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.click-count {
+  font-weight: bold;
+  color: #16a34a;
+}
