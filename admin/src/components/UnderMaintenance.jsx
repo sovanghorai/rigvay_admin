@@ -1,5 +1,5 @@
 import "./../styles/maintenance.css";
-import Logo from "../assets/logo.png";
+import Logo from "../assets/Logo.png";
 
 
 const UnderMaintenance = ({ title = "Page Under Maintenance", subtitle = "We're working to improve this page. Please check back later and stay tuned!." }) => {
