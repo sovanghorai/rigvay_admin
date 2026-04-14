@@ -147,6 +147,9 @@ export default function DealerPage() {
                   <div className="suggestion-sub">
                     {d.rigvay_id} • {d.email}
                   </div>
+                  <div className="suggestion-company">
+                    {d.companyName}
+                  </div>
                 </div>
               ))}
             </div>

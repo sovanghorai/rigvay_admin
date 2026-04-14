@@ -86,7 +86,10 @@
   font-weight: 600;
   color: #222;
 }
-
+.suggestion-company {
+  font-weight: 500;
+  color: #ff0000;
+}
 .suggestion-sub {
   font-size: 0.8rem;
   color: #777;
