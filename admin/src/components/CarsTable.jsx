@@ -72,6 +72,9 @@ export default function CarsTable({
                       <div style={{ fontSize: "12px", color: "#666" }}>
                         {getDaysAgo(car.createdAt)}
                       </div>
+                      <span className="car-date">
+                        {new Date(car.createdAt).toLocaleDateString("en-GB")}
+                      </span>
                     </td>
 
                     {/* Images */}

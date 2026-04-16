@@ -35,6 +35,11 @@ export default function DealersTable({ dealers, onApprove, onReject }) {
                   <div>
                     <div style={{fontWeight:600}}>{d.firstName} {d.lastName}</div>
                     <div style={{fontSize:'0.85rem',color:'#556'}}>{d.rigvay_id}</div>
+                    <div className="dealer-meta">
+                      <span className="dealer-date">
+                        {new Date(d.createdAt).toLocaleDateString("en-GB")}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </td>
