@@ -39,6 +39,9 @@ export default function AdminNavbar({ onLogout }) {
         <NavLink to="/analytics" className={linkClass} onClick={() => setMenuOpen(false)}>
           Analytics
         </NavLink>
+        <NavLink to="/data-download" className={linkClass} onClick={() => setMenuOpen(false)}>
+          Data Download!
+        </NavLink>
 
         {onLogout && (
           <button className="nav-item logout-btn" onClick={onLogout}>

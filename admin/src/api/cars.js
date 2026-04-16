@@ -82,3 +82,34 @@ export async function editAdminCar(id, formData) {
   );
   return handleJsonResponse(res);
 }
+
+export async function getFilteredCars({rigvay_id,dealerId,startDate,limit = 300}) {
+  try {
+    const params = new URLSearchParams();
+    // ✅ TODAY CHECK
+    const today = new Date().toISOString().split("T")[0];
+    if (startDate === today) {
+      params.append("type", "today");
+    } else if (startDate) {
+      params.append("startDate", startDate);
+    }
+    if (rigvay_id) params.append("rigvay_id", rigvay_id);
+    if (dealerId) params.append("dealerId", dealerId);
+    if (limit) params.append("limit", limit);
+
+    const query = params.toString();
+
+    const url = query
+      ? `${API_BASE}/admin/cars/download-filter?${query}`
+      : `${API_BASE}/admin/cars/download-filter`;
+
+    const res = await authFetch(url, { method: "GET" });
+    const data = await handleJsonResponse(res);
+
+    return data?.data || [];
+
+  } catch (error) {
+    console.error("getFilteredCars error:", error);
+    return [];
+  }
+}

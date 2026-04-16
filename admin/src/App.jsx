@@ -10,6 +10,7 @@ import EditCarPage from "./pages/EditCarPage";
 import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
 import ProducersPage from "./pages/ProducersPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
+import CarDataDownload from "./pages/CarDataDownload";
 
 function ProtectedRoute({ token, children }) {
   if (!token) return <Navigate to="/login" replace />
@@ -57,6 +58,7 @@ function App() {
           <Route path="subscriptions" element={<AdminDealerSubscription />} />
           <Route path ="producers" element={<ProducersPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="data-download" element={<CarDataDownload />} />
           <Route path="/car-edit/:carId" element={<EditCarPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
