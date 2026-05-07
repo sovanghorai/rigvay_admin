@@ -45,6 +45,7 @@ export default function CarsTable({
               <th>Images</th>
               <th>Type</th>
               <th>Price</th>
+              <th>Views</th>
               <th>Fuel</th>
               <th>Transmission</th>
               <th>Location</th>
@@ -101,7 +102,16 @@ export default function CarsTable({
 
                     {/* Price */}
                     <td>₹ {car.price?.toLocaleString("en-IN") || "-"}</td>
+                    {/* Views */}
+                    <td>
+                      <div className="view-box">
+                        <span className="view-icon">👁</span>
 
+                        <span className="view-count">
+                          {car.views || 0}
+                        </span>
+                      </div>
+                    </td>
                     {/* Fuel */}
                     <td>{car.fuelType || "-"}</td>
 
