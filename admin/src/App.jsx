@@ -1,71 +1,126 @@
-import { useState } from 'react'
-import './App.css'
-import './styles/admin.css'
-import AdminNavbar from './components/AdminNavbar'
-import DealerPage from './pages/DealerPage'
-import AdminLogin from './pages/AdminLogin'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate } from "react-router-dom";
+import "./App.css";
+import "./styles/admin.css";
+
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import AdminNavbar from "./components/AdminNavbar";
+import PermissionRoute from "./components/PermissionRoute";
+
+import AdminLogin from "./pages/AdminLogin";
+import DealerPage from "./pages/DealerPage";
 import CarsPage from "./pages/CarsPage";
 import EditCarPage from "./pages/EditCarPage";
-import AdminDealerSubscription from './pages/AdminDealerSubscription' // ← new page
+import AdminDealerSubscription from "./pages/AdminDealerSubscription";
 import ProducersPage from "./pages/ProducersPage";
 import AnalyticsPage from "./pages/AnalyticsPage";
 import CarDataDownload from "./pages/CarDataDownload";
 
-function ProtectedRoute({ token, children }) {
-  if (!token) return <Navigate to="/login" replace />
-  return children
-}
+/**
+ * Layout component for authenticated pages
+ */
+function AdminLayout() {
+  const { logout } = useAuth();
 
-import { Outlet } from 'react-router-dom'
-
-function AdminLayout({ onLogout }) {
   return (
     <div className="admin-root">
-      <AdminNavbar onLogout={onLogout} />
+      <AdminNavbar onLogout={logout} />
       <main className="admin-main">
-        {/* nested routes will render here */}
-        <Outlet />
+        <Routes>
+          <Route index element={<DealerPage />} />
+
+          <Route
+            path="cars"
+            element={
+              <PermissionRoute permission="cars">
+                <CarsPage />
+              </PermissionRoute>
+            }
+          />
+
+          <Route
+            path="subscriptions"
+            element={
+              <PermissionRoute permission="subscriptions">
+                <AdminDealerSubscription />
+              </PermissionRoute>
+            }
+          />
+
+          <Route
+            path="producers"
+            element={
+              <PermissionRoute permission="producers">
+                <ProducersPage />
+              </PermissionRoute>
+            }
+          />
+
+          <Route
+            path="analytics"
+            element={
+              <PermissionRoute permission="analytics">
+                <AnalyticsPage />
+              </PermissionRoute>
+            }
+          />
+
+          <Route
+            path="data-download"
+            element={
+              <PermissionRoute permission="data_download">
+                <CarDataDownload />
+              </PermissionRoute>
+            }
+          />
+
+          <Route
+            path="car-edit/:carId"
+            element={
+              <PermissionRoute permission="cars">
+                <EditCarPage />
+              </PermissionRoute>
+            }
+          />
+
+          {/* Catch-all for undefined routes */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
       </main>
     </div>
-  )
+  );
 }
 
+/**
+ * Protected Admin Layout that checks authentication
+ */
+function ProtectedAdminLayout() {
+  const { isAuthenticated } = useAuth();
 
-function App() {
-  const [token, setToken] = useState(localStorage.getItem('admin_access_token') || null)
-
-  const handleLogin = (t) => setToken(t)
-  const handleLogout = () => {
-    localStorage.removeItem('admin_access_token')
-    setToken(null)
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
 
-  return (
-    <div>
-      <Routes>
-        <Route path="/login" element={<AdminLogin onLogin={handleLogin} />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute token={token}>
-              <AdminLayout onLogout={handleLogout} />
-            </ProtectedRoute>
-          }
-        >
-          <Route index element={<DealerPage />} />
-          <Route path="cars" element={<CarsPage />} />
-          <Route path="subscriptions" element={<AdminDealerSubscription />} />
-          <Route path ="producers" element={<ProducersPage />} />
-          <Route path="analytics" element={<AnalyticsPage />} />
-          <Route path="data-download" element={<CarDataDownload />} />
-          <Route path="/car-edit/:carId" element={<EditCarPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Route>
-        <Route path="*" element={<Navigate to={token ? '/' : '/login'} replace />} />
-      </Routes>
-    </div>
-  )
+  return <AdminLayout />;
 }
 
-export default App
+/**
+ * Main App component
+ */
+function App() {
+  return (
+    <AuthProvider>
+      <Routes>
+        {/* Public login route */}
+        <Route path="/login" element={<AdminLogin />} />
+
+        {/* Protected admin routes */}
+        <Route path="/*" element={<ProtectedAdminLayout />} />
+
+        {/* Catch-all fallback */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </AuthProvider>
+  );
+}
+
+export default App;
