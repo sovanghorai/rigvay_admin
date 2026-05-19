@@ -16,6 +16,7 @@ const AnalyticsPage = () => {
     endDate: "",
     dealer_rigvay_id: "",
     search: "",
+    limit: "",
   });
 
   const [page, setPage] = useState(1);
@@ -80,7 +81,7 @@ const AnalyticsPage = () => {
         <input type="date" name="endDate" onChange={handleChange} />
         <input name="dealer_rigvay_id" placeholder="Dealer ID" onChange={handleChange} />
         <input name="search" placeholder="Search phone/car" onChange={handleChange} />
-
+        <input type="number" name="limit" placeholder="Export Limit" value={filters.limit} onChange={handleChange} min="1" />
         <button onClick={applyFilters}>Apply</button>
         <button className="download-btn" onClick={downloadCSV}>
           ⬇ Download CSV
