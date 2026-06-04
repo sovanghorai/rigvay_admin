@@ -12,7 +12,7 @@ export default function CarDataDownload() {
 
   const [cars, setCars] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const [showDeleted, setShowDeleted] = useState(false);
   /* ================= FETCH DATA ================= */
   const fetchData = async () => {
     setLoading(true);
@@ -21,7 +21,8 @@ export default function CarDataDownload() {
       rigvay_id: rigvayId,
       dealerId,
       startDate,
-      limit
+      limit,
+      showDeleted
     });
 
     setCars(data);
@@ -107,6 +108,16 @@ export default function CarDataDownload() {
           value={limit}
           onChange={(e) => setLimit(e.target.value)}
         />
+        <div className={`checkbox-box ${showDeleted ? "active" : ""}`}>
+          <label className="checkbox-label">
+            <input
+              type="checkbox"
+              checked={showDeleted}
+              onChange={(e) => setShowDeleted(e.target.checked)}
+            />
+            <span>Download Deleted Cars</span>
+          </label>
+        </div>
 
         <button className="btn-result" onClick={fetchData}>
           {loading ? "Loading..." : "Get Result"}
