@@ -8,6 +8,7 @@ export default function CarDataDownload() {
   const [rigvayId, setRigvayId] = useState("");
   const [dealerId, setDealerId] = useState("");
   const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
   const [limit, setLimit] = useState(300);
 
   const [cars, setCars] = useState([]);
@@ -21,6 +22,7 @@ export default function CarDataDownload() {
       rigvay_id: rigvayId,
       dealerId,
       startDate,
+      endDate,
       limit,
       showDeleted
     });
@@ -96,11 +98,23 @@ export default function CarDataDownload() {
           onChange={(e) => setDealerId(e.target.value)}
         />
 
-        <input
-          type="date"
-          value={startDate}
-          onChange={(e) => setStartDate(e.target.value)}
-        />
+        <label className="date-field">
+          <span>Start Date</span>
+          <input
+            type="date"
+            value={startDate}
+            onChange={(e) => setStartDate(e.target.value)}
+          />
+        </label>
+
+        <label className="date-field">
+          <span>End Date</span>
+          <input
+            type="date"
+            value={endDate}
+            onChange={(e) => setEndDate(e.target.value)}
+          />
+        </label>
 
         <input
           type="number"

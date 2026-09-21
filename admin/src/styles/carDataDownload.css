@@ -24,6 +24,20 @@
   font-size: 14px;
 }
 
+.date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.date-field span {
+  color: #495057;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 /* BUTTON BASE */
 .form-grid button {
   padding: 10px;

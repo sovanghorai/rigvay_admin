@@ -83,16 +83,24 @@ export async function editAdminCar(id, formData) {
   return handleJsonResponse(res);
 }
 
-export async function getFilteredCars({rigvay_id,dealerId,startDate,limit = 300, showDeleted = false}) {
+export async function getFilteredCars({
+  rigvay_id,
+  dealerId,
+  startDate,
+  endDate,
+  limit = 300,
+  showDeleted = false
+}) {
   try {
     const params = new URLSearchParams();
     // ✅ TODAY CHECK
     const today = new Date().toISOString().split("T")[0];
-    if (startDate === today) {
+    if (startDate === today && !endDate) {
       params.append("type", "today");
     } else if (startDate) {
       params.append("startDate", startDate);
     }
+    if (endDate) params.append("endDate", endDate);
     if (rigvay_id) params.append("rigvay_id", rigvay_id);
     if (dealerId) params.append("dealerId", dealerId);
     if (limit) params.append("limit", limit);
