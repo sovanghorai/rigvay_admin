@@ -107,14 +107,14 @@ export default function CarDataDownload() {
           />
         </label>
 
-        <label className="date-field">
+        {/* <label className="date-field">
           <span>End Date</span>
           <input
             type="date"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
           />
-        </label>
+        </label> */}
 
         <input
           type="number"
