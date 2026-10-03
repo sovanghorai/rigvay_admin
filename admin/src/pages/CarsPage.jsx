@@ -32,6 +32,7 @@ export default function CarsPage() {
       if (selectedTab === "all") {
         res = await getAllCars(selectedPage);
         setTotalAll(res?.pagination?.totalCars || 0);
+        setTotalUnapproved(res?.pagination?.totalUnapprovedCars || 0);
       } else {
         res = await getUnapprovedCars(selectedPage);
         setTotalUnapproved(res?.pagination?.totalCars || 0);
